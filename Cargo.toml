@@ -1,0 +1,29 @@
+cargo-features = ["different-binary-name"]
+
+# keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[project]
+name = "payments_example"
+edition = "2021" # mandatory to be 2021, required by Cargo
+version = "0.1.0"
+
+
+[dependencies]
+tonic = "0.7"
+prost = "0.10"
+# async support
+tokio = { version = "1.0", features = ["macros", "rt-multi-thread"] }
+
+# help to build Protocol buffers
+[build-dependencies]
+tonic-build = "0.7"
+
+[[bin]]
+path = "src/server.rs"
+# the upper file will be compillled to 
+name = "payments-server"
+
+[[bin]]
+name = "payments-client"
+# the upper file will be compillled to 
+path = "src/client.rs"
